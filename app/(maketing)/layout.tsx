@@ -1,12 +1,11 @@
-import { Metadata } from "next"
 import { ReactNode } from "react"
 import { Roboto } from 'next/font/google'
 import { Navbar } from "./_components/navbar"
 import { Footer } from "./_components/footer"
-export const metadata: Metadata = {
-  title: "Taskify No. 1",
-  description: "Such a Good Apps"
-}
+// export const metadata: Metadata = {
+//   title: "Taskify No. 1",
+//   description: "Such a Good Apps"
+// }
 
 const roboto = Roboto({
   weight: ['100', '300', '400', "500", "700", '900'], 
