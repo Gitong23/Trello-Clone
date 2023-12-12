@@ -8,7 +8,8 @@ import { useOrganization, useOrganizationList } from '@clerk/nextjs'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@radix-ui/react-separator'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Accordion } from '@radix-ui/react-accordion'
+import { Accordion } from '@/components/ui/accordion'
+import NavItem from './nav-item'
 
 interface SidebarProps {
   storageKey?: string;
@@ -63,9 +64,40 @@ export const Sidebar = ({
 
   return (
     <>
-      <div>
-        Sidebar
+      <div className='font-medium text-xs flex items-center mb-1'>
+        <span className='pl-4'>
+          Workspaces
+        </span>
+        <Button
+          asChild
+          type='button'
+          size='icon'
+          variant='ghost'
+          className='ml-auto'
+        >
+          <Link href="/select-org">
+            <Plus className='h-4 w-4'/>
+          </Link>
+        </Button>
       </div>
+      <Accordion
+        type='multiple'
+        defaultValue={defaultAccordionValue}
+        className='space-y-2'
+      >
+        { userMemberships.data.map (({organization}) => (
+          // <p key={organization.id}>
+          //   {organization.name}
+          // </p>
+          <NavItem
+            key={organization.id}
+            isActive={activeOrganization?.id === organization.id}
+            isExpanded={expanded[organization.id]}
+            organization={organization}
+            onExpand={onExpand}
+          />
+        ))}
+      </Accordion>
     </>
   )
 }
